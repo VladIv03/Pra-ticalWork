@@ -1,0 +1,6 @@
+C:\Users\vladi\RiderProjects\PraсticalWork\PraсticalWork\bin\Debug\PraсticalWork.exe
+C:\Users\vladi\RiderProjects\PraсticalWork\PraсticalWork\bin\Debug\PraсticalWork.pdb
+C:\Users\vladi\RiderProjects\PraсticalWork\PraсticalWork\obj\Debug\PraсticalWork.csproj.AssemblyReference.cache
+C:\Users\vladi\RiderProjects\PraсticalWork\PraсticalWork\obj\Debug\PraсticalWork.csproj.CoreCompileInputs.cache
+C:\Users\vladi\RiderProjects\PraсticalWork\PraсticalWork\obj\Debug\PraсticalWork.exe
+C:\Users\vladi\RiderProjects\PraсticalWork\PraсticalWork\obj\Debug\PraсticalWork.pdb
