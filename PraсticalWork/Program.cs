@@ -45,7 +45,10 @@ namespace PraсticalWork
             while (true)
             {
                 Console.WriteLine("========================================");
-                Console.WriteLine($"Statistic:\nNickname: {nickname}\nAge: {age}\nNumber of wins: {playerTotalWins}");
+                Console.WriteLine("╔════════════════════╗");
+                Console.WriteLine("║     Statistic      ║");
+                Console.WriteLine("╚════════════════════╝");
+                Console.WriteLine($"Nickname: [{nickname}]\nAge: [{age}]\nNumber of wins: [{playerTotalWins}]");
                 Console.WriteLine("========================================");
                 var isChoise = false;
                 var choise = 0;
@@ -60,17 +63,13 @@ namespace PraсticalWork
                         continue;
                     }
                     isChoise = true;
-                    if (choise == 1)
-                    {
-
-                    }
+                    if (choise == 1) { }
                     else
                     {
                         Console.WriteLine($"Goodbye, {nickname}!");
                         return;
                     }
                 }
-
                 string[] winMessages = { "Well done, you smashed it!", "Great, you're on top!", "Well played!" };
                 string[] loseMessages = 
                 {
@@ -79,9 +78,12 @@ namespace PraсticalWork
                 };
                 Random random = new Random();
                 int[] options = { 1, 2, 3 };
-                int playerWin = 0, computerWin = 0, rounds = 0;
-                while (rounds < 3 && playerWin < 2 && computerWin < 2)
+                int playerWin = 0, computerWin = 0, round = 0;
+                while (  playerWin < 3 && computerWin < 3)
                 {
+                    Console.WriteLine($"╔════════════╗");
+                    Console.WriteLine($"║ Round {round}    ║");
+                    Console.WriteLine($"╚════════════╝");
                     int playerChoice = 0;
                     bool isValidChoice = false;
                     while (!isValidChoice)
@@ -99,6 +101,7 @@ namespace PraсticalWork
                     if (playerChoise == computerChoice)
                     {
                         Console.WriteLine("Its Draw");
+                        round++;
                         continue;
                     } 
                     if ((playerChoise == 1 && computerChoice == 2) ||
@@ -113,20 +116,19 @@ namespace PraсticalWork
                         computerWin++;
                         Console.WriteLine($"Computer win this round!");
                     }
-                    rounds++;
+                    round++;
                 }
-                if (playerWin >= 2)
+                if (playerWin ==3 || (playerWin == 2 && computerWin == 1))
                 {
-                    Console.WriteLine("You won the battle!");
+                    Console.WriteLine("YOU WON THIS GAME!");
                     playerTotalWins++;
                     Console.WriteLine(winMessages[random.Next(0,3)]);
                 }
-                else if (computerWin >= 2)
+                else if (computerWin == 3 || (computerWin == 2 && playerWin == 1))
                 {
-                    Console.WriteLine("Computer won the battle!");
+                    Console.WriteLine("COMPUTER WON THIS GAME");
                     Console.WriteLine(loseMessages[random.Next(0,3)]);
                 }
-                else Console.WriteLine("It was a draw");
             }
 
 
