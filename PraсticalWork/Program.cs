@@ -40,21 +40,21 @@ namespace PraсticalWork
                 }
                 isAgeInt = true;
             }
-            int playerTotalWins = 0;
+            var playerTotalWins = 0;
             Console.WriteLine($"Your age is {age}. Let's continue!");
             while (true)
             {
-                Console.WriteLine("========================================");
-                Console.WriteLine("╔════════════════════╗");
-                Console.WriteLine("║     Statistic      ║");
-                Console.WriteLine("╚════════════════════╝");
-                Console.WriteLine($"Nickname: [{nickname}]\nAge: [{age}]\nNumber of wins: [{playerTotalWins}]");
-                Console.WriteLine("========================================");
+                Console.WriteLine("=================================================");
+                Console.WriteLine("            ╔════════════════════╗");
+                Console.WriteLine("            ║     Statistic      ║");
+                Console.WriteLine("            ╚════════════════════╝");
+                Console.WriteLine($"Nickname: [{nickname}] Age: [{age}] Number of wins: [{playerTotalWins}]");
+                Console.WriteLine("=================================================");
                 var isChoise = false;
                 var choise = 0;
                 while (!isChoise)
                 {
-                    Console.WriteLine("Press: 1 to play\nPress: 2 to exit the game");
+                    Console.WriteLine("Press: 1 - Play\nPress: 2 - Exit");
                     var input = Console.ReadLine();
                     var isNumber = int.TryParse(input, out choise);
                     if (!isNumber || (choise != 1 && choise != 2))
@@ -76,37 +76,74 @@ namespace PraсticalWork
                     "Don't be upset, try again!", "A bit of bad luck, go for it!",
                     "You'll win next time!"
                 };
-                Random random = new Random();
-                int[] options = { 1, 2, 3 };
-                int playerWin = 0, computerWin = 0, round = 0;
+                var random = new Random();
+                int playerWin = 0, computerWin = 0, round = 1;
+                int playerRoundWins = 0, computerRoundWins = 0, roundDraws = 0;
                 while (  playerWin < 3 && computerWin < 3)
                 {
                     Console.WriteLine($"╔════════════╗");
                     Console.WriteLine($"║ Round {round}    ║");
                     Console.WriteLine($"╚════════════╝");
-                    int playerChoice = 0;
-                    bool isValidChoice = false;
+                    var playerChoice = 0;
+                    var isValidChoice = false;
                     while (!isValidChoice)
                     {
                         Console.WriteLine("Select the type of weapon:\n1.Stone 2.Scissors 3.Paper");
-                        string input = Console.ReadLine();
+                        var input = Console.ReadLine();
                         isValidChoice = int.TryParse(input, out playerChoice) && playerChoice >= 1 && playerChoice <= 3;
                         if (!isValidChoice) Console.WriteLine("Press 1, 2 or 3!");
                     }
-                    Console.WriteLine($"You chose: {playerChoice}");
-                    int playerChoise = playerChoice;
-                    int computerChoice = options[random.Next(0, 3)];
-                    string computerChoiceText = computerChoice == 1 ? "Stone" : computerChoice == 2 ? "Scissors" : "Paper";
-                    Console.WriteLine($"Computer choice: {computerChoice} - {computerChoiceText}");
-                    if (playerChoise == computerChoice)
+                    var playerChoiceText = playerChoice == 1 ? "Stone" : playerChoice == 2 ? "Scissors" : "Paper";
+                    Console.WriteLine($"You chose: {playerChoiceText}");
+                    
+                    string[] ascii = new string[]
+                    {      //Stone
+                        @"    
+                        _______
+                    ---'   ____)
+                          (_____)
+                           (_____)
+                           (____)
+                     ---.__(___)
+                        ",
+                        //Scissors
+                        @"
+                         _______
+                      ---'  ____)____
+                                ______)
+                            __________)
+                            (____)
+                      ---.__(___)
+                           ",
+                        //Paper
+                       @"
+                         _______
+                     ---'   ____)____
+                               ______)
+                              _______)
+                              _______)
+                      ---.__________)
+                        "
+                    };
+                    var userChoice = playerChoice-1;
+                    Console.WriteLine(ascii[userChoice]);
+                    Console.OutputEncoding = System.Text.Encoding.UTF8;
+                    var playerChoise = playerChoice;
+                    var computerChoice = new Random().Next(0, 3);
+                    var computerChoiceText = computerChoice == 1 ? "Scissors" : computerChoice == 2 ? "Paper" : "Stone";
+                    Console.WriteLine($"Computer choice:   {computerChoiceText}");
+                    Console.WriteLine(ascii[computerChoice]);
+                    if ((playerChoise == 1 && computerChoice == 0)||
+                        (playerChoise == 2 && computerChoice == 1)||
+                        (playerChoice ==3 && computerChoice == 2))
                     {
                         Console.WriteLine("Its Draw");
                         round++;
                         continue;
                     } 
-                    if ((playerChoise == 1 && computerChoice == 2) ||
-                          (playerChoise == 2 && computerChoice == 3) ||
-                          (playerChoise == 3 && computerChoice == 1))
+                    if ((playerChoise == 1 && computerChoice == 1) ||
+                          (playerChoise == 2 && computerChoice == 2) ||
+                          (playerChoise == 3 && computerChoice == 0))
                     {
                         Console.WriteLine($"You win this round!");
                         playerWin++;
@@ -130,12 +167,6 @@ namespace PraсticalWork
                     Console.WriteLine(loseMessages[random.Next(0,3)]);
                 }
             }
-
-
-
-
-
-
         }
     }
 }
