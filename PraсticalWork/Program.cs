@@ -70,6 +70,13 @@ namespace PraсticalWork
                         return;
                     }
                 }
+
+                string[] winMessages = { "Well done, you smashed it!", "Great, you're on top!", "Well played!" };
+                string[] loseMessages = 
+                {
+                    "Don't be upset, try again!", "A bit of bad luck, go for it!",
+                    "You'll win next time!"
+                };
                 Random random = new Random();
                 int[] options = { 1, 2, 3 };
                 int playerWin = 0, computerWin = 0, rounds = 0;
@@ -93,10 +100,10 @@ namespace PraсticalWork
                     {
                         Console.WriteLine("Its Draw");
                         continue;
-                    }
+                    } 
                     if ((playerChoise == 1 && computerChoice == 2) ||
-                        (playerChoise == 2 && computerChoice == 3) ||
-                        (playerChoise == 3 && computerChoice == 1))
+                          (playerChoise == 2 && computerChoice == 3) ||
+                          (playerChoise == 3 && computerChoice == 1))
                     {
                         Console.WriteLine($"You win this round!");
                         playerWin++;
@@ -112,8 +119,13 @@ namespace PraсticalWork
                 {
                     Console.WriteLine("You won the battle!");
                     playerTotalWins++;
+                    Console.WriteLine(winMessages[random.Next(0,3)]);
                 }
-                else if (computerWin >= 2) Console.WriteLine("Computer won the battle!");
+                else if (computerWin >= 2)
+                {
+                    Console.WriteLine("Computer won the battle!");
+                    Console.WriteLine(loseMessages[random.Next(0,3)]);
+                }
                 else Console.WriteLine("It was a draw");
             }
 
