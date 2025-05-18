@@ -6,7 +6,11 @@ namespace PraсticalWork
     {
         public static void Main()
         {
-            Console.WriteLine("Hello, Welcome to the game: Stone Scissors Paper");
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.WriteLine("   ==================================================");
+            Console.WriteLine(">>> Hello, Welcome to the game: Stone Scissors Paper <<<");
+            Console.WriteLine("   ==================================================");
+            Console.ResetColor();
             Console.Write("Enter your Nickname:");
             var nickname = Console.ReadLine();
             {
@@ -27,7 +31,6 @@ namespace PraсticalWork
                     Console.WriteLine("Age cannot be empty. Try again.");
                     continue;
                 }
-
                 var isNumber = int.TryParse(ageInt, out age);
                 if (!isNumber)
                 {
@@ -40,10 +43,8 @@ namespace PraсticalWork
                     Console.WriteLine("Sorry, the game is only available from 12 years old.");
                     continue;
                 }
-
                 isAgeInt = true;
             }
-
             var playerTotalWins = 0;
             Console.WriteLine($"Your age is {age}. Let's continue!");
             while (true)
@@ -55,7 +56,6 @@ namespace PraсticalWork
                 Console.WriteLine($"Nickname: [{nickname}] Age: [{age}] Number of wins: [{playerTotalWins}]");
                 Console.WriteLine("======================================================");
                 var isChoise = false;
-                
                 while (!isChoise)
                 {
                     Console.WriteLine("Press: 1 - Play\nPress: 2 - Exit");
@@ -66,7 +66,6 @@ namespace PraсticalWork
                         Console.WriteLine("Invalid input. Try again.");
                         continue;
                     }
-
                     isChoise = true;
                     if (choise == 1)
                     {
@@ -77,7 +76,6 @@ namespace PraсticalWork
                         return;
                     }
                 }
-
                 var random = new Random();
                 int playerWin = 0, computerWin = 0, round = 1;
                 int playerRoundWins = 0, computerRoundWins = 0, roundDraws = 0;
@@ -99,7 +97,7 @@ namespace PraсticalWork
                     var playerChoiceText = playerChoice == 1 ? "Stone" : playerChoice == 2 ? "Scissors" : "Paper";
                     Console.WriteLine($"You choise: [{playerChoiceText}]");
 
-                    string[] ascii = new string[]
+                    var ascii = new string[]
                     {
                         //Stone
                         @"    
@@ -131,29 +129,36 @@ namespace PraсticalWork
                     };
                     Console.WriteLine(ascii[playerChoice - 1]);
                     Console.OutputEncoding = System.Text.Encoding.UTF8;
-                    var playerChoise = playerChoice;
                     var computerChoice = new Random().Next(1, 4);
                     var computerChoiceText = computerChoice == 1 ? "Stone" : computerChoice == 2 ? "Scissors" : "Paper";
                     Console.WriteLine($"Computer choice: [{computerChoiceText}]");
                     Console.WriteLine(ascii[computerChoice - 1]);
-                    if ((playerChoise == 1 && computerChoice == 2) ||
-                        (playerChoise == 2 && computerChoice == 3) ||
-                        (playerChoise == 3 && computerChoice == 1))
+                    Console.Write("Result of this round: ");
+                    if ((playerChoice == 1 && computerChoice == 2) ||
+                        (playerChoice == 2 && computerChoice == 3) ||
+                        (playerChoice == 3 && computerChoice == 1))
                     {
-                        Console.WriteLine($"You win this round!");
+                        Console.ForegroundColor = ConsoleColor.Green;
+                        Console.WriteLine("=== WIN ===");
+                        Console.ResetColor();
                         playerWin++;
                         playerRoundWins++;
                     }
-                    else if (playerChoise == computerChoice)
-                    {
-                        Console.WriteLine("Its Draw");
+                    else if (playerChoice == computerChoice)
+                    { 
+                        
+                        Console.ForegroundColor = ConsoleColor.Yellow;
+                        Console.WriteLine("=== DRAW ===");
+                        Console.ResetColor();
                         roundDraws++;
                     }
                     else
                     {
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine("=== LOSE ===");
+                        Console.ResetColor();
                         computerRoundWins++;
                         computerWin++;
-                        Console.WriteLine($"Computer win this round!");
                     }
 
                     round++;
@@ -181,13 +186,17 @@ namespace PraсticalWork
                 };
                 if (playerWin == 3 || (playerWin == 2 && computerWin == 1))
                 {
-                    Console.WriteLine("YOU WON THIS GAME!");
+                    Console.ForegroundColor = ConsoleColor.DarkGreen;
+                    Console.WriteLine("      ^^^YOU WIN THIS GAME^^^");
+                    Console.ResetColor();
                     playerTotalWins++;
                     Console.WriteLine(winMessages[random.Next(0, winMessages.Length)]);
                 }
                 else if (computerWin == 3 || (computerWin == 2 && playerWin == 1))
                 {
-                    Console.WriteLine("COMPUTER WON THIS GAME");
+                    Console.ForegroundColor = ConsoleColor.DarkRed;
+                    Console.WriteLine("      ^^^COMPUTER WIN THIS GAME^^^");
+                    Console.ResetColor();
                     Console.WriteLine(loseMessages[random.Next(0, loseMessages.Length)]);
                 }
 
