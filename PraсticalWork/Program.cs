@@ -95,7 +95,7 @@ namespace PraсticalWork
                     }
 
                     var playerChoiceText = playerChoice == 1 ? "Stone" : playerChoice == 2 ? "Scissors" : "Paper";
-                    Console.WriteLine($"You choise: [{playerChoiceText}]");
+                    Console.WriteLine($"You choice: [{playerChoiceText}]");
 
                     var ascii = new string[]
                     {
